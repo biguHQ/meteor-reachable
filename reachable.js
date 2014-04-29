@@ -1,57 +1,33 @@
 if(Meteor.isServer) {
-    var cheerio =  Meteor.require('cheerio');
     var request =  Meteor.require('request');
 
-    var stealerUFRJ = function(requestedUrl, settings) {
+    var isReachable = function(reqUrl) {
 
-        if(!_.isObject(settings))
-            throw new Meteor.Error(400, "settings must be of object type");
+        if(!reqUrl)
+            throw new Meteor.Error(400, "Url is emty");
 
-        if(!requestedUrl || !_.isString(requestedUrl))
-            throw new Meteor.Error(400, "requestUrl not found or is not a string");
-
-        // Our cookie jar
-        jar = request.jar();
-
-        settings = _.defaults(settings, {
-            url: 'https://intranet.ufrj.br/Utilidades2006/Login.asp',
-            method: 'POST',
+        settings =  {
+            url: reqUrl,
+            method: 'GET',
             followAllRedirects: true,
             strictSSL: false,
             rejectUnauthorized: false,
-            jar: jar,
-            form: {
-                usuario: settings.username,
-                senha: settings.password
-            }
-        });
+            jar: true
+        }
 
-        var reqIntranet = Async.runSync(function(done) {
+        var handshake = Async.runSync(function(done) {
             request(settings, function(err, res, body) {
                 done(err, res);
             });
         });
 
-        $ = cheerio.load(reqIntranet.result.body);
 
-        // Cheerio selector for SIGA from href attr at Intranet Services page
-        var sigaURL = $('table:nth-child(1) tr:nth-child(2) strong a').attr('href');
+        if(!handshake.error && _.contains([200,301,302],handshake.result.statusCode))
+            return true;
 
-
-        var reqSIGA = Async.runSync(function(done) {
-            request( _.extend(settings, {url: sigaURL}), function(err, res) {
-
-                request( _.extend(settings, {
-                    url: requestedUrl}),
-                    function(err, res) {
-                        done(err, res);
-                });
-            });
-        });
-
-        return reqSIGA.result.body;
+        return false;
     }
 
-    stealerUFRJ('https://siga.ufrj.br//sira/Service/cridAluno', {username: '11910564737', password: '280294'});
+    console.log(isReachable('http://intranet.ufrj.br'));
+    console.log(isReachable('http://google.com.br'));
 }
-
