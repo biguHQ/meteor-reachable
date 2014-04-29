@@ -1,12 +1,11 @@
 {
-    "name": "stealer-ufrj",
-    "description": "Stealer UFRJ craws data from UFRJ Intranet and SIGA",
-    "homepage": "https://github.com/gabrielalmeida/stealer-ufrj",
+    "name": "reachable",
+    "description": "Reachable check simple comnnectivity against any server",
+    "homepage": "https://github.com/gabrielalmeida/reachable",
     "author": "Gabriel Almeida",
     "version": "0.0.1",
-    "git": "https://github.com/gabrielalmeida/stealer-ufrj.git",
+    "git": "https://github.com/gabrielalmeida/reachable.git",
     "packages": {
-        "http-more": {},
         "npm": {}
     }
 }
