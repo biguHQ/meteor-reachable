@@ -6,6 +6,8 @@ Package.on_use(function(api) {
 
     api.use(['underscore', 'npm' ], ['client', 'server']);
     api.add_files('reachable.js', ['client', 'server']);
+  
+    api.export("isReachable");
 });
 
 
