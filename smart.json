@@ -1,10 +1,10 @@
 {
     "name": "reachable",
     "description": "Reachable check simple comnnectivity against any server",
-    "homepage": "https://github.com/gabrielalmeida/reachable",
+    "homepage": "https://github.com/bigu21/reachable",
     "author": "Gabriel Almeida",
     "version": "0.0.1",
-    "git": "https://github.com/gabrielalmeida/reachable.git",
+    "git": "https://github.com/bigu21/reachable.git",
     "packages": {
         "npm": {}
     }

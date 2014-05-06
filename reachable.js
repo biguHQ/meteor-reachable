@@ -28,6 +28,6 @@ if(Meteor.isServer) {
         return false;
     }
 
-    console.log(isReachable('http://intranet.ufrj.br'));
-    console.log(isReachable('http://google.com.br'));
+    //console.log(isReachable('http://intranet.ufrj.br'));
+    //console.log(isReachable('http://google.com.br'));
 }
